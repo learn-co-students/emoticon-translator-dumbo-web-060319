@@ -24,8 +24,21 @@ def load_library(lib)
   emote_dictionary
 end
 
-def get_japanese_emoticon
-  # code goes here
+def get_japanese_emoticon(lib, emote)
+  # answer will be returned at the end of method
+  ans = "Sorry, that emoticon was not found"
+  # load library and iterate through
+  load_library(lib).map do |get_stuff, kv_pairs|
+    if get_stuff == "get_emoticon"
+      # select key value pair where the english emote = the one passed to our method
+      kv_pairs.select do |eng, jpn|
+        # if it's a match, re-assign answer's value
+        ans = jpn if eng == emote
+      end
+    end
+  end
+  # return answer
+  ans
 end
 
 def get_english_meaning
